@@ -11,7 +11,7 @@ app.secret_key = 'engenharia'
 app.config['MYSQL_HOST'] = 'br326.hostgator.com.br'
 app.config['MYSQL_USER'] = 'zupmed78_user'
 app.config['MYSQL_PASSWORD'] = 'Fy45jkloaz'
-app.config['MYSQL_DB'] = 'mf'
+app.config['MYSQL_DB'] = 'zupmed78_mf'
 app.config['MYSQL_PORT'] = 3306
 db = MySQL(app)
 
