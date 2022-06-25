@@ -1,6 +1,6 @@
 from models import ContasPagar, Usuario, Despesas, ContasPagar,Entrada, Poupanca
 
-SQL_CRIA_CLIENTE = 'INSERT into cliente (nome,sobrenome,email,senha) values (%s, %s, %s, %s) AND INSERT INTO despesas (iddespesas, dta_vencimento, tipodesp_idtipo, idcliente, valor) VALUES (%s, '', 1, %s, 0) AND INSERT INTO entradas (identradas, valor_entrada, dta_entrada, tipoentrada_idtipo, idcliente) VALUES (%s, 0, '', 1, %s) '
+SQL_CRIA_CLIENTE = 'INSERT into cliente (nome,sobrenome,email,senha) values (%s, %s, %s, %s)'
 SQL_DELETA_CLIENTE = 'DELETE from cliente where idcliente=%s'
 SQL_ATUALIZA_CLIENTE = 'UPDATE cliente SET nome=%s,sobrenome=%s,email=%s, senha=%s where idcliente=%s'
 SQL_USUARIO_POR_ID = 'SELECT idcliente,nome,sobrenome,email,senha from cliente where email=%s '

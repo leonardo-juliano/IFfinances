@@ -64,13 +64,13 @@ def index():
     lista_contas = contas_dao.listar(idcliente)
     soma = poupanca_dao.somar(idcliente)[0]
     despesa_somar = despesas_dao.somar(idcliente)[0]
-    somar_total = despesas_dao.somar_total(cod=idcliente)[0]
+    # somar_total = despesas_dao.somar_total(cod=idcliente)[0]
     print(idcliente)
     entrada_somar = entrada_dao.somar(idcliente)[0]
     
 
     
-    return render_template('Dashboard.html',despesas = lista, poupar = soma, conta = lista_contas, despesa = despesa_somar, entrada = entrada_somar,somar_total = somar_total)
+    return render_template('Dashboard.html',despesas = lista, poupar = soma, conta = lista_contas, despesa = despesa_somar, entrada = entrada_somar)
 
 #REGISTRO DE USUÁRIO
 @app.route('/cadastro')
@@ -271,8 +271,11 @@ def salvarContasReceber():
 
 #--------------------------------------------------------
 if __name__ == '__main__':
-    port = int(os.getenv('PORT'), '5000')
-    app.run(debug=True,host='0.0.0.0', port =port)  
+    
+    app.run(debug=True)  
+
+    # port = int(os.getenv('PORT'), '5000')
+    # ,host='0.0.0.0', port =port
     
      
  
