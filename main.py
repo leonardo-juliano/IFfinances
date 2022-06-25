@@ -3,6 +3,8 @@ from flask import Flask, render_template, request, redirect, flash, session, sen
 from dao import UsuarioDao, DespesasDao, EntradaDao, PoupancaDao, ContasPagarDao, ContasReceberDao
 from flask_mysqldb import  MySQL
 
+import os 
+
 from models import Usuario, Despesas, Entrada, Poupanca, ContasPagar, ContasReceber
 
 app = Flask(__name__)
@@ -271,11 +273,11 @@ def salvarContasReceber():
 
 #--------------------------------------------------------
 if __name__ == '__main__':
-    
-    app.run(debug=True)  
+    port = int(os.getenv('PORT'), '5000')
+    app.run(debug=True,host='0.0.0.0', port = port)  
 
-    # port = int(os.getenv('PORT'), '5000')
-    # ,host='0.0.0.0', port =port
+    
+    
     
      
  
