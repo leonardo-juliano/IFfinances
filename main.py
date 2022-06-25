@@ -8,10 +8,10 @@ from models import Usuario, Despesas, Entrada, Poupanca, ContasPagar, ContasRece
 app = Flask(__name__)
 app.secret_key = 'engenharia'
 
-app.config['MYSQL_HOST'] = '108.167.132.57'
-app.config['MYSQL_USER'] = 'zupmed78_user'
-app.config['MYSQL_PASSWORD'] = 'Fy45jkloaz'
-app.config['MYSQL_DB'] = 'zupmed78_mf'
+app.config['MYSQL_HOST'] = 'us-cdbr-east-05.cleardb.net'
+app.config['MYSQL_USER'] = 'b282da519b8592'
+app.config['MYSQL_PASSWORD'] = '11fa78a1'
+app.config['MYSQL_DB'] = 'heroku_ef56e2014119af6'
 app.config['MYSQL_PORT'] = 3306
 db = MySQL(app)
 
