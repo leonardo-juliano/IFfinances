@@ -1,4 +1,4 @@
-from models import ContasPagar, Usuario, Despesas, ContasPagar,Entrada, Poupanca
+from models import ContasPagar, Usuario, Despesas, ContasPagar,Entrada, Poupanca, ContasReceber
 
 SQL_CRIA_CLIENTE = 'INSERT into cliente (nome,sobrenome,email,senha) values (%s, %s, %s, %s)'
 SQL_DELETA_CLIENTE = 'DELETE from cliente where idcliente=%s'
@@ -31,6 +31,7 @@ SQL_CRIA_CONTA_PAGAR = 'INSERT into pagar (tipo,valor,datapagar,idcliente) value
 SQL_BUSCA_PAGAR = 'SELECT  idpagar,datapagar, tipo, valor from pagar WHERE idcliente = %s'
 #--------------------------------------------------------------------------------------------------------------
 SQL_CRIA_CONTA_RECEBER = 'INSERT into receber (tipo,valor,datareceber,idcliente) values (%s, %s,%s,%s)'
+SQL_BUSCA_RECEBER = 'SELECT  idreceber, datareceber, tipo,valor  from receber WHERE idcliente = %s'
 
 def traduz_usuario(tupla):    
    # return Usuario(tupla[1],tupla[2],tupla[3],tupla[4],tupla[5],tupla[0])
@@ -55,9 +56,9 @@ class UsuarioDao:
         
         return cliente
 
-    def atualizarConta(self,cliente):
+    def atualizarConta(self,cliente,idcliente):
         cursor = self.__db.connection.cursor()
-        cursor.execute(SQL_ATUALIZA_CLIENTE,(cliente,))
+        cursor.execute(SQL_ATUALIZA_CLIENTE,(cliente,idcliente,))
         self.__db.connection.commit()
 
     #Deleta usuario
@@ -117,9 +118,9 @@ class DespesasDao:
         self.__db.connection.commit()   
         return despesas
     #--------------------------------------------------
-    def busca_por_id(self,id):
+    def busca_por_id(self,idcliente):
         cursor = self.__db.connection.cursor()
-        cursor.execute(SQL_DESPESAS_POR_ID,(id,))
+        cursor.execute(SQL_DESPESAS_POR_ID,(idcliente,))
         tupla = cursor.fetchone()
         print(tupla)
         return Despesas(tupla[1], tupla[2], tupla[3] , id= tupla[0])
@@ -218,15 +219,15 @@ class ContasPagarDao:
     def listar(self,idcliente):
         cursor = self.__db.connection.cursor()
         cursor.execute(SQL_BUSCA_PAGAR,(idcliente,))
-        contas = traduz_contas(cursor.fetchall())
+        pagamento = traduz_contas(cursor.fetchall())
         self.__db.connection.commit()   
-        return contas
+        return pagamento
 
-def traduz_contas(contas):
+def traduz_contas(pagamento):
     def cria_contas_com_tupla(tupla):
         print(tupla)
-        return(ContasPagar(tupla[3],tupla[1],tupla[2],tupla[0]))
-    return list(map(cria_contas_com_tupla,contas))
+        return(ContasPagar(tupla[2],tupla[3],tupla[1]))
+    return list(map(cria_contas_com_tupla,pagamento))
 
 class ContasReceberDao:  
     def __init__(self,db):
@@ -237,9 +238,18 @@ class ContasReceberDao:
         cursor.execute(SQL_CRIA_CONTA_RECEBER,(receber._tipo,receber._valor,receber._data,receber._idcliente))
         cursor._id = cursor.lastrowid
         self.__db.connection.commit()
+    
+    def listar(self,idcliente):
+        cursor = self.__db.connection.cursor()
+        cursor.execute(SQL_BUSCA_RECEBER,(idcliente,))
+        recebimento = traduz_recebimentos(cursor.fetchall())
+        self.__db.connection.commit()   
+        return recebimento
 
-
-
+def traduz_recebimentos(recebimento):
+    def cria_recebimento_com_tupla(tupla):
+        return ContasReceber(tupla[3],tupla[1],tupla[2])
+    return list(map(cria_recebimento_com_tupla,recebimento))
 
 
     

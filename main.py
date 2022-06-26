@@ -61,18 +61,18 @@ def index():
     if 'usuario_logado' not in session or session['usuario_logado']==None:
         print('usuario_logado')
         return redirect('/login?proxima=index')
-    print(10)
+    
     lista = despesas_dao.listar(idcliente)
-    lista_contas = contas_dao.listar(idcliente)
+    listas = contas_dao.listar(idcliente)
     soma = poupanca_dao.somar(idcliente)[0]
     despesa_somar = despesas_dao.somar(idcliente)[0]
     # somar_total = despesas_dao.somar_total(cod=idcliente)[0]
-    print(idcliente)
+    
     entrada_somar = entrada_dao.somar(idcliente)[0]
     
 
     
-    return render_template('Dashboard.html',despesas = lista, poupar = soma, conta = lista_contas, despesa = despesa_somar, entrada = entrada_somar)
+    return render_template('Dashboard.html',despesas = lista, poupar = soma, pagamento = listas, despesa = despesa_somar, entrada = entrada_somar)
 
 #REGISTRO DE USUÁRIO
 @app.route('/cadastro')
@@ -104,7 +104,7 @@ def deletar_cliente(idcliente):
 def logout():
     session['usuario_logado'] = None
     
-    flash('Nenhum usuario logado','error')
+    flash( ' Nenhum usuario logado','sucesso')
     return redirect('/login')
 
 
@@ -211,6 +211,7 @@ def salvarPoupanca():
 #------------------CONTA---------------------------
 @app.route('/conta')
 def conta():
+    
     nome_usuario=usuario_dao.listar_nome(idcliente)[0]
     sobrenome_usuario=usuario_dao.listar_sobrenome(idcliente)[0]
     email_usuario=usuario_dao.listar_email(idcliente)[0]
@@ -223,11 +224,16 @@ def atualizarConta():
     sobrenome = request.form['sobrenome']
     email = request.form['email']
     senha = request.form['senha']
-    idcliente = request.form['idcliente']
     
-    cliente = Usuario(nome,sobrenome,email,senha,idcliente)
     
-    usuario_dao.atualizarConta(cliente)
+    cliente = Usuario(nome,sobrenome,email,senha)
+    print(nome)
+    print(email)
+    print(sobrenome)
+    print(idcliente)
+    
+    
+    usuario_dao.atualizarConta(cliente,idcliente)
     return redirect('/despesas')
 
 @app.route('/contas_pagar')
@@ -269,12 +275,29 @@ def salvarContasReceber():
     receber_dao.salvar(receber)
     flash(' Conta Cadastrada com sucesso!','sucesso')
     return redirect('/contas_pagar')
+
+@app.route('/visualizar_receber')
+def visualizar_receber():
+    if 'usuario_logado' not in session or session['usuario_logado']==None:
+        return redirect('/login?proxima=index')
+    lista = receber_dao.listar(idcliente)
+   
+    return render_template('visualizar_receber.html', titulo = "Cadastre suas Contas a Pagar", recebimento = lista)
+
+@app.route('/visualizar_pagamentos')
+def visualizar_pagamentos():
+    if 'usuario_logado' not in session or session['usuario_logado']==None:
+        return redirect('/login?proxima=index')
+    lista = contas_dao.listar(idcliente)
+   
+    return render_template('visualizar_pagamentos.html', titulo = "Cadastre suas Contas a Pagar", pagamento = lista)
+
+
   
 
 #--------------------------------------------------------
 if __name__ == '__main__':
-    port = int(os.getenv('PORT'), '5000')
-    app.run(debug=True,host='0.0.0.0', port = port)  
+    app.run(debug=True)  
 
     
     

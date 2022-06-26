@@ -27,39 +27,38 @@
 </head>
 
 <body>
-    <div class="side-menu">
-        <div class="brand-name">
-          <h1><img src="../img/logo4.png" alt=""></h1>
-        </div>
-        <ul>
-          <li>
-            <a href="{{ url_for('index')}}"><img src="../img/home.svg" />&nbsp;Inicio</a>
-          </li>
-          <li>
-            <a href="{{url_for('entrada')}}"><img src="../img/lucro.svg" />&nbsp;Entradas</a>
-          </li>
-          <li>
-            <a href="{{url_for('despesas')}}"><img src="../img/teste_1.svg" />&nbsp;Saidas</a>
-          </li>
-          <li>
-            <a href="{{url_for('poupanca')}}"><img src="../img/porquinho.svg" />&nbsp;Poupança</a>
-          </li>
-    
-          <li>
-            <a href="{{url_for('conta')}}"><img src="../img/conta.svg" />&nbsp;Minha conta</a>
-          </li>
-          <li>
-            <a href="{{url_for('contas_pagar')}}"><img src="../img/pagamento.svg" />&nbsp;Contas a Pagar</a>
-          </li>
-          <li>
-            <a href="{{url_for('contas_receber')}}"><img src="../img/recebimento.svg" />&nbsp;Contas a Receber</a>
-          </li>
-          <li>
-            <a href="{{url_for('logout')}}"><img src="../img/sair.svg" />&nbsp;Sair</a>
-          </li>
-    
-        </ul>
-      </div>
+  <div class="side-menu">
+    <div class="brand-name">
+      <h1><img src="../img/logo4.png" alt=""></h1>
+    </div>
+    <ul>
+      <li>
+        <a href="{{ url_for('index')}}"><img src="../img/home.svg" />&nbsp;Inicio</a>
+      </li>
+      <li>
+        <a href="{{url_for('entrada')}}"><img src="../img/lucro.svg" />&nbsp;Entradas</a>
+      </li>
+      <li>
+        <a href="{{url_for('despesas')}}"><img src="../img/teste_1.svg" />&nbsp;Saidas</a>
+      </li>
+      <li>
+        <a href="{{url_for('poupanca')}}"><img src="../img/porquinho.svg" />&nbsp;Poupança</a>
+      </li>
+      <li>
+        <a href="{{url_for('contas_pagar')}}"><img src="../img/pagamento.svg" />&nbsp;Contas a Pagar</a>
+      </li>
+      <li>
+        <a href="{{url_for('contas_receber')}}"><img src="../img/recebimento.svg" />&nbsp;Contas a Receber</a>
+      </li>
+       <li>
+        <a href="{{url_for('conta')}}"><img src="../img/conta.svg" />&nbsp;Minha conta</a>
+      </li> 
+      <li>
+        <a href="{{url_for('logout')}}"><img src="../img/sair.svg" />&nbsp;Sair</a>
+      </li>
+
+    </ul>
+  </div>
 
     <div class="row d-flex justify-content-center">
         <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
@@ -121,7 +120,7 @@
                                 <h class="escrita_incluir">Cadastrar conta a receber</h>
                             </button>
                             <button class="botaum_cancelar">
-                                <a href="{{ url_for('index')}}" class="escrita_cancelar">Visualizar recebimentos</a>
+                                <a href="{{ url_for('visualizar_receber')}}" class="escrita_cancelar">Visualizar recebimentos</a>
                             </button>
                         </div>
                         

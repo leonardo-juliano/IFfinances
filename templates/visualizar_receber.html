@@ -69,93 +69,32 @@
         {% endfor %}
       </ul>
       {% endif %} {% endwith %}
-      <div class="cards">
-        <div class="card">
-          <div class="box">
-            <h1 class="preto">R$ </h1>
-            <h3>Total</h3>
-          </div>
-        </div>
-        <div class="card">
-          <div class="box">
-            <h1 class="preto">R$ {% print despesa %}</h1>
-            <h3>Saidas</h3>
-          </div>
-
-        </div>
-        <div class="card">
-          <div class="box">
-            <h1 class="preto">R$ {% print entrada %}</h1>
-            <h3>Entradas</h3>
-          </div>
-        </div>
-        <div class="card">
-          <div class="box">
-            <h1 class="preto">R$ {% print poupar %}</h1>
-            <h3>Poupança</h3>
-          </div>
-        </div>
-      </div>
+     
       <div class="content-2">
         <div class="recent-payments">
           <div class="title">
-            <h2 class="preto">Saidas</h2>
+            <h2 class="preto">Contas a Receber</h2>
             <!-- <a href="#" class="btn">View All</a> -->
           </div>
           <table>
             <thead>
               <tr>
-                <th>Data</th>
+                <th>Data de Recebimento </th>
                 <th>tipo</th>
                 <th>Valor</th>
                 <th>Ação</th>
               </tr>
             </thead>
             <tbody>
-              {% for despesa in despesas %}
+              {% for receber in recebimento %}
               <tr>
                 
-                <td>{{ despesa._tipo }}</td>
-                <td>{{ despesa._valor }}</td>
-                <td>{{ despesa._data }}</td>
-                <td>
-                  <a href="{{url_for('deletar', id= despesa._id)}}" class="btn btn-danger"><img src="img/trash.svg"
-                      data-bs-toggle="tooltip" data-bs-placement="bottom" title="Excluir" /></a>&nbsp;&nbsp;&nbsp;<a
-                    href="{{url_for('editar', id= despesa._id)}}" class="btn btn-info"><img src="img/pencil-square.svg"
-                      data-bs-toggle="tooltip" data-bs-placement="bottom" title="Editar" /></a>
-                </td>
+                <td>{{ receber._tipo }}</td>
+                <td>{{ receber._valor }}</td>
+                <td>{{ receber._data }}</td>
               </tr>
               {%endfor%}
             </tbody>
-          </table>
-        </div>
-        <div class="content-2">
-          <div class="recent-payments">
-            <div class="title">
-              <h2 class="preto">Contas a pagar</h2>
-              
-            </div>
-            <table>
-              <thead>
-                <tr>
-                  <th>Vencimento</th>
-                  <th>tipo</th>
-                  <th>Valor</th>
-                  <th>Ação</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for pagar in pagamento %}
-                <tr>
-                  <td>{{ pagar._tipo }}</td>
-                  <td>{{ pagar._valor }}</td>
-                  <td>{{ pagar._data }}</td>
-
-                </tr>
-                {%endfor%}
-              </tbody>
-            </table>
-          </div>
           </table>
         </div>
     </div>

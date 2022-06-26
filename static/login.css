@@ -50,7 +50,16 @@ body{
     align-items: center;
     margin-top: 30px;
 }
+.mensagem_erro{
+    background-color: #406564;
+    border-radius: 25px;
+    padding: 7px;
 
+}
+.escrita_popup{
+    color: white;
+    text-decoration: none;
+}
 .btn:hover{
     background-color: white;
     border: none;
