@@ -10,10 +10,10 @@ from models import Usuario, Despesas, Entrada, Poupanca, ContasPagar, ContasRece
 app = Flask(__name__)
 app.secret_key = 'engenharia'
 
-app.config['MYSQL_HOST'] = 'us-cdbr-east-05.cleardb.net'
-app.config['MYSQL_USER'] = 'b282da519b8592'
-app.config['MYSQL_PASSWORD'] = '11fa78a1'
-app.config['MYSQL_DB'] = 'heroku_ef56e2014119af6'
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'mf'
 app.config['MYSQL_PORT'] = 3306
 db = MySQL(app)
 
@@ -297,6 +297,8 @@ def visualizar_pagamentos():
 
 #--------------------------------------------------------
 if __name__ == '__main__':
+    port = int(os.getenv('PORT'), '5000')
+    app.run(host='0.0.0.0', port = port)
     app.run(debug=True)  
 
     
